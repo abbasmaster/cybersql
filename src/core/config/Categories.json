@@ -383,6 +383,7 @@
         "ops": [
             "Magic",
             "Fork",
+			"Disjoin",
             "Merge",
             "Register",
             "Label",
