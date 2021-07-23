@@ -291,7 +291,8 @@
             "CSS selector",
             "Extract EXIF",
             "Extract ID3",
-            "Extract Files"
+            "Extract Files",
+            "Extract Bitcoin Addresses"
         ]
     },
     {
