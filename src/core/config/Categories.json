@@ -185,7 +185,8 @@
             "Rotate left",
             "Rotate right",
             "ROT13",
-            "ROT8000"
+            "ROT8000",
+            "Add/Subtract/Multiply/Divide by value"
         ]
     },
     {

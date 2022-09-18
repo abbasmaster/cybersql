@@ -121,6 +121,7 @@ import "./tests/Subsection.mjs";
 import "./tests/CaesarBoxCipher.mjs";
 import "./tests/LS47.mjs";
 import "./tests/LZString.mjs";
+import "./tests/AddSubMulDivValue.mjs";
 
 
 // Cannot test operations that use the File type yet
