@@ -44,7 +44,7 @@ class OperationsWaiter {
             if (ops.length) {
                 selected = this.getSelectedOp(ops);
                 if (selected > -1) {
-                    this.manager.recipe.addOperation(ops[selected].innerHTML);
+                    this.manager.recipe.addOperation($(ops[selected]).data("opname"));
                 }
             }
         }
@@ -209,8 +209,20 @@ class OperationsWaiter {
      */
     operationDblclick(e) {
         const li = e.target;
+        // get operation name from <li> data
+        this.manager.recipe.addOperation($(li).data("opname"));
+    }
 
-        this.manager.recipe.addOperation(li.textContent);
+    /**
+     * Handler for operation add events.
+     * Adds the operation to the recipe and auto bakes.
+     *
+     * @param {event} e
+     */
+    operationAdd(e) {
+        const li = e.target.parentNode.parentNode.parentNode;
+        // get operation name from <li> data
+        this.manager.recipe.addOperation($(li).data("opname"));
     }
 
 

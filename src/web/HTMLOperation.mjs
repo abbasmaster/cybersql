@@ -27,6 +27,7 @@ class HTMLOperation {
         this.manager     = manager;
 
         this.name        = name;
+        this.title       = name;
         this.description = config.description;
         this.infoURL     = config.infoURL;
         this.manualBake  = config.manualBake || false;
@@ -46,7 +47,7 @@ class HTMLOperation {
      * @returns {string}
      */
     toStubHtml(removeIcon) {
-        let html = "<li class='operation'";
+        let html = `<li class='operation' data-opname="${this.name}"`;
 
         if (this.description) {
             const infoLink = this.infoURL ? `<hr>${titleFromWikiLink(this.infoURL)}` : "";
@@ -56,18 +57,25 @@ class HTMLOperation {
                 data-boundary='viewport'`;
         }
 
-        html += ">" + this.name;
+        html += ">" + this.title;
 
+        // Ensure add button only appears in sidebar, not fav edit
         if (removeIcon) {
+            // Remove button
             html += "<i class='material-icons remove-icon op-icon'>delete</i>";
+        } else {
+            // Add buttob
+            html += `<span class='float-right'>
+                <button type="button" class="btn btn-primary bmd-btn-icon accessibleUX" data-toggle="tooltip" data-original-title="Add to recipe">
+                    <i class='material-icons'>add_box</i>
+                </button>
+            </span>`;
         }
 
         html += "</li>";
 
         return html;
     }
-
-
     /**
      * Renders the operation in HTML as a full operation with ingredients.
      *
@@ -83,6 +91,9 @@ class HTMLOperation {
 
         html += `</div>
         <div class="recip-icons">
+            <i class="material-icons move-down accessibleUX" title="Move down">arrow_downward</i>
+            <i class="material-icons move-up accessibleUX">arrow_upward</i>
+            <i class="material-icons remove-icon accessibleUX" title="Delete operation">delete</i>
             <i class="material-icons breakpoint" title="Set breakpoint" break="false">pause</i>
             <i class="material-icons disable-icon" title="Disable operation" disabled="false">not_interested</i>
         </div>
@@ -100,18 +111,18 @@ class HTMLOperation {
      */
     highlightSearchStrings(nameIdxs, descIdxs) {
         if (nameIdxs.length && typeof nameIdxs[0][0] === "number") {
-            let opName = "",
+            let title = "",
                 pos = 0;
 
             nameIdxs.forEach(idxs => {
                 const [start, length] = idxs;
                 if (typeof start !== "number") return;
-                opName += this.name.slice(pos, start) + "<b>" +
-                    this.name.slice(start, start + length) + "</b>";
+                title += this.title.slice(pos, start) + "<b>" +
+                    this.title.slice(start, start + length) + "</b>";
                 pos = start + length;
             });
-            opName += this.name.slice(pos, this.name.length);
-            this.name = opName;
+            title += this.title.slice(pos, this.title.length);
+            this.title = title;
         }
 
         if (this.description && descIdxs.length && descIdxs[0][0] >= 0) {
