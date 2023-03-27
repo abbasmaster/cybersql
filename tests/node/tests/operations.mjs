@@ -591,10 +591,17 @@ Password: 034148`;
         assert.strictEqual(result.toString().substr(0, 37), "-----BEGIN PGP PRIVATE KEY BLOCK-----");
     }),
 
-    it("Generate UUID", () => {
-        const result = chef.generateUUID();
-        assert.ok(result.toString());
-        assert.strictEqual(result.toString().length, 36);
+    it("Generate UUID v1", () => {
+        const result = chef.generateUUID("", { version: "v1" }).toString();
+        assert.ok(result);
+        assert.equal(result.length, 36);
+    }),
+
+    it("Analyse UUID v1", () => {
+        const uuidv1 = chef.generateUUID("", { version: "v1" }).toString();
+        const uuidAnalysis = chef.analyseUUID(uuidv1).toString();
+
+        assert.equal(uuidAnalysis, "UUID version: 1");
     }),
 
     it("Gzip, Gunzip", () => {
