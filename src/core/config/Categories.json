@@ -423,6 +423,7 @@
             "CSS Minify",
             "XPath expression",
             "JPath expression",
+            "jq",
             "CSS selector",
             "PHP Deserialize",
             "Microsoft Script Decoder",
