@@ -117,6 +117,7 @@ import "./tests/CBORDecode.mjs";
 import "./tests/JA3Fingerprint.mjs";
 import "./tests/JA3SFingerprint.mjs";
 import "./tests/HASSH.mjs";
+import "./tests/EscapeSmartCharacters.mjs";
 import "./tests/GetAllCasings.mjs";
 import "./tests/SIGABA.mjs";
 import "./tests/ELFInfo.mjs";
